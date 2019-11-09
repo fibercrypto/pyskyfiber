@@ -8,7 +8,6 @@
 %}
 
 //Apply strictly to python
-//Not for other languages
 %include "/gopath/src/github.com/fibercrypto/libskycoin/lib/swig/common/common.i"
 %include "/gopath/src/github.com/fibercrypto/libskycoin/lib/swig/dynamic/dynamic.i"
 %include "python_skycoin.cipher.crypto.i"
