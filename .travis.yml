@@ -69,7 +69,6 @@ env:
     - PATH_SUBMODULE: "gopath/src/github.com/fibercrypto/libskycoin"
 
 before_install:
-  - bash ./.travis/change_submodule.sh
   - if [[ "$TRAVIS_OS_NAME" == 'linux' ]]; then bash ./.travis/install-linux.sh ; fi
   - if [[ "$TRAVIS_OS_NAME" == 'osx' ]]; then bash ./.travis/install-osx.sh; fi
   - if [[ "$TRAVIS_OS_NAME" == 'osx' ]]; then
