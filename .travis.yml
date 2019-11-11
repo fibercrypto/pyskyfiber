@@ -118,7 +118,7 @@ deploy:
     on:
       all_branches: true
       tags: true
-      repo: skycoin/pyskycoin
+      repo: fibercrypto/pyskycoin
   - provider: pypi
     distributions: sdist
     skip_cleanup: true
@@ -130,7 +130,7 @@ deploy:
     on:
       all_branches: true
       tags: true
-      repo: skycoin/pyskycoin
+      repo: fibercrypto/pyskycoin
   - provider: pypi
     distributions: bdist_wheel
     skip_cleanup: true
@@ -142,13 +142,13 @@ deploy:
     on:
       all_branches: true
       tags: true
-      repo: skycoin/pyskycoin
+      repo: fibercrypto/pyskycoin
       condition: $TRAVIS_OS_NAME = "osx"
   - provider: script
     script: bash .travis/skyapi_deploy.sh
     on:
       all_branches: true
       tags: true
-      repo: skycoin/pyskycoin
+      repo: fibercrypto/pyskycoin
       condition: $TRAVIS_BRANCH =~ "^release-.*$"
 # TODO: Upload manylinux wheels to PyPI
