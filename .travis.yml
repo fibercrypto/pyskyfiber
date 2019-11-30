@@ -34,11 +34,6 @@ matrix:
     - os: osx
       language: go
       env:
-        - PYTHON=2.7.16
-        - TOXENV=py27
-    - os: osx
-      language: go
-      env:
         - PYTHON=3.4.8
         - TOXENV=py34
     - os: osx
