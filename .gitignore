@@ -10,6 +10,9 @@ __pycache__/
 *.so
 *.o
 *.orig
+Pyskycoin-*
+eggs
+wheelhouse/
 
 *~
 
@@ -23,8 +26,21 @@ tests/mytest.py
 .tox
 .cache
 
+# Temp files
 *.swp
 *.swo
 skycoin.py
 swig/pyskycoin_wrap.c
 
+# IDES
+.idea/
+.vscode/
+
+# SWIG
+*.kbk
+
+swig/pyskycoin_wrap.c
+.directory
+core*
+qemu_*
+venv

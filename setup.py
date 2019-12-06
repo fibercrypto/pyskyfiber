@@ -7,22 +7,24 @@
 from setuptools import setup, find_packages, Extension
 from setuptools.command.build_ext import build_ext
 from distutils.errors import DistutilsSetupError
-from distutils import log as distutils_logger
+
 # To use a consistent encoding
 from codecs import open
 from os import path
-import os, subprocess
+import os
+import subprocess
 import platform
 import sys
+from skycoin import __version__
 
 script_dirname = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(script_dirname, 'README.md'), encoding='utf-8') as f:
+with open(path.join(script_dirname, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
-class skycoin_build_ext(build_ext, object):
 
+class skycoin_build_ext(build_ext, object):
     def build_extension(self, ext):
 
         if ext.name != "_skycoin":
@@ -57,61 +59,53 @@ class skycoin_build_ext(build_ext, object):
             super(skycoin_build_ext, self).build_extension(ext)
 
 
-
-skypath = path.join(*("gopath/src/github.com/skycoin/skycoin".split('/')))
-lib_path = path.join(skypath, 'build', 'libskycoin')
-library_file = path.join(lib_path, 'libskycoin.a')
+skypath = path.join(*("gopath/src/github.com/fibercrypto/libskycoin".split("/")))
+lib_path = path.join(skypath, "build", "libskycoin")
+library_file = path.join(lib_path, "libskycoin.a")
 extra_link_args = []
 if platform.system() == "Darwin":
-	extra_link_args += ["-framework", "Foundation", "-framework", "Security"]
+    extra_link_args += ["-framework", "Foundation", "-framework", "Security"]
 extra_link_args.append(library_file)
 
 setup(
-	name='Pyskycoin', 
-    version='0.24.1', 
-	description='Skycoin Python Library',
+    name='pyskycoin',  # Required
+    version=__version__,  # Required
+    description="Skycoin Python Library",
     long_description=long_description,
-    url='https://github.com/simelo/pyskycoin',
-    author='stdevEclipse', 
-    author_email='dev0003@simelo.tech',
+    long_description_content_type="text/markdown",
+    url="https://github.com/fibercrypto/pyskycoin",
+    author="Maykel Arias",  # Optional
+    author_email="skycoin@simelo.tech",
     setup_requires=["pytest-runner"],
-    tests_require=["pytest"],
+    tests_require=["pytest", "urllib3", "certifi"],
     classifiers=[
         #   3 - Alpha
         #   4 - Beta
         #   5 - Production/Stable
-        'Development Status :: 3 - Alpha',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
     ],
-    keywords='skycoin crypto coin currency blockchain',
-    packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-    py_modules = ['skycoin'],
+    keywords="skycoin crypto coin currency blockchain",  # Optional
+    py_modules=["skycoin"],
+    packages=find_packages(exclude=["contrib", "docs", "tests"]),  # Required
     install_requires=[],
-    extras_require={
-        'dev': ['check-manifest'],
-        'test': ['coverage'],
-    },
-    package_data={
-    },
-    entry_points={
-        'console_scripts': [
-        ],
-    },
-    cmdclass = {'build_ext': skycoin_build_ext},
-    ext_modules = [Extension("_skycoin", ["swig/pyskycoin_wrap.c"],
-                         include_dirs=[
-                             "swig/include",
-                             path.join(skypath, "include")
-                         ],
-                         extra_link_args=extra_link_args,
-                         depends=[],
-                   )],
-
+    extras_require={"dev": ["check-manifest"], "test": ["coverage"]},  # Optional
+    package_data={},
+    entry_points={"console_scripts": []},
+    cmdclass={"build_ext": skycoin_build_ext},
+    ext_modules=[
+        Extension(
+            "_skycoin",
+            ["swig/pyskycoin_wrap.c"],
+            include_dirs=["swig/include", path.join(skypath, "include")],
+            extra_link_args=extra_link_args,
+            depends=[],
+        )
+    ],
 )
