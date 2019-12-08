@@ -85,13 +85,13 @@ if platform.system() == "Darwin":
 extra_link_args.append(library_file)
 
 setup(
-    name='pyskycoin',  # Required
+    name='pyskyfiber',  # Required
     version=__version__,  # Required
     description="Skycoin Python Library",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/fibercrypto/pyskycoin",
-    author="Maykel Arias",  # Optional
+    url="https://github.com/fibercrypto/pyskyfiber",
+    author="Ratmil Torres",  # Optional
     author_email="skycoin@simelo.tech",
     setup_requires=["pytest-runner"],
     tests_require=["pytest", "urllib3", "certifi"],
@@ -101,7 +101,7 @@ setup(
         #   5 - Production/Stable
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
