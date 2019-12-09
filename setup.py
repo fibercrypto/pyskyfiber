@@ -31,46 +31,29 @@ class skycoin_build_ext(build_ext, object):
             # Handle unspecial extensions with the parent class' method
             super(skycoin_build_ext, self).build_extension(ext)
         else:
-            # Handle special extension
-            sources = ext.sources
-            if sources is None or not isinstance(sources, (list, tuple)):
-                raise DistutilsSetupError(
-                    "in 'ext_modules' option (extension '%s'), "
-                    "'sources' must be present and must be "
-                    "a list of source filenames" % ext.name
-                )
-            sources = list(sources)
+            files = os.listdir(script_dirname)
+            sys.stderr.write("files before: " + str(files))
+            print("files before: " + str(files)) 
 
-            if len(sources) > 1:
-                sources_path = os.path.commonprefix(sources)
-            else:
-                sources_path = os.path.dirname(sources[0])
-            sources_path = os.path.realpath(sources_path)
-            if not sources_path.endswith(os.path.sep):
-                sources_path += os.path.sep
+            make_path = os.path.realpath(script_dirname)
 
-            if not os.path.exists(sources_path) or not os.path.isdir(sources_path):
-                raise DistutilsSetupError(
-                    "in 'extensions' option (extension '%s'), "
-                    "the supplied 'sources' base dir "
-                    "must exist" % ext.name
-                )
-
-            make_path = os.path.realpath(os.path.join(sources_path, ".."))
-
-            make_process = subprocess.Popen(
-                "make build-libc-swig",
-                cwd=make_path,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                shell=True,
-            )
+            make_process = subprocess.Popen('make build-libc-swig',
+                                            cwd=make_path,
+                                            stdout=subprocess.PIPE,
+                                            stderr=subprocess.PIPE,
+                                            shell=True)
+            sys.stderr.write("files after: " + str(files))
             stdout, stderr = make_process.communicate()
+            
             print("stdout:")
             sys.stderr.write(str(stdout))
             if len(stderr) > 0:
-                print("stderr:")
-                sys.stderr.write(str(stderr))
+            	print("stderr:")
+            	sys.stderr.write(str(stderr))
+            files = os.listdir(script_dirname)
+            sys.stderr.write("files after: " + str(files))
+            print("files after: " + str(files)) 
+            
             # After making the library build the c library's
             # python interface with the parent build_extension method
             super(skycoin_build_ext, self).build_extension(ext)
