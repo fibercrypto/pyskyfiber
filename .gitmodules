@@ -1,0 +1,3 @@
+[submodule "gopath/src/github.com/fibercrypto/libskyfiber"]
+	path = gopath/src/github.com/fibercrypto/libskyfiber
+	url = https://github.com/fibercrypto/libskyfiber
