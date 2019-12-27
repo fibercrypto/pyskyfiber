@@ -19,8 +19,8 @@ mkdir swig_build && \
   tar -zxf swig-3.0.12.tar.gz && \
   cd swig-3.0.12 && \
   sudo ./configure --disable-dependency-tracking --prefix=/usr && \
-  make && \
-  make install && \
+  sudo make && \
+  sudo make install && \
   cd ../../ && \
   rm -rf swig_build
   
