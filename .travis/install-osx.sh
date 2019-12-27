@@ -9,21 +9,10 @@ brew install pyenv-virtualenv;
 brew install readline xz;
 echo 'Creating swig@3.0.12 formula';
 cd "$(brew --repository)/Library/Taps/homebrew/homebrew-core";
-git show 42d31bba7772fb01f9ba442d9ee98b33a6e7a055:Formula/swig.rb | grep -v 'fails_with' > Formula/swig.rb;
+(cd Formula && curl -sL -o "swig.rb" https://raw.githubusercontent.com/Homebrew/homebrew-core/42d31bba7772fb01f9ba442d9ee98b33a6e7a055/Formula/swig.rb)
 echo 'Installing swig@3.0.12 (3.0.12)';
 brew install swig || brew link --overwrite swig;
 
-# mkdir swig_build && \
-#   cd swig_build && \
-#   curl -sL -o "swig-3.0.12.tar.gz" http://prdownloads.sourceforge.net/swig/swig-3.0.12.tar.gz && \
-#   tar -zxf swig-3.0.12.tar.gz && \
-#   cd swig-3.0.12 && \
-#   sudo ./configure --disable-dependency-tracking --prefix=/usr && \
-#   sudo make && \
-#   sudo make install && \
-#   cd ../../ && \
-#   rm -rf swig_build
-  
 brew install gimme;
 brew install yamllint;
 
