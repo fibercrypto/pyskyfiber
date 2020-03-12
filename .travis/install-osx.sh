@@ -33,4 +33,3 @@ export PATH="${PYCMD_DIRPATH}:/Users/travis/.pyenv/shims:${PATH}"
 
 eval "python${PYCMD_VERSION} -m pip install setuptools_scm"
 eval "python${PYCMD_VERSION} -m pip install --upgrade pip setuptools wheel tox tox-pyenv pytest pytest-runner pylint autopep8"
-
