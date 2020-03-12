@@ -10,7 +10,7 @@ PYTHON_BIN   ?= python$(PYTHON)
 MKFILE_PATH   = $(abspath $(lastword $(MAKEFILE_LIST)))
 REPO_ROOT     = $(dir $(MKFILE_PATH))
 GOPATH_DIR    = gopath
-SKYLIBC_DIR  ?= $(GOPATH_DIR)/src/github.com/fibercrypto/libskycoin
+SKYLIBC_DIR  ?= $(GOPATH_DIR)/src/github.com/fibercrypto/libskyfiber
 SKYCOIN_DIR  ?= $(SKYLIBC_DIR)/vendor/github.com/skycoin/skycoin
 SKYBUILD_DIR  = $(SKYLIBC_DIR)/build
 BUILDLIBC_DIR = $(SKYBUILD_DIR)/libskycoin
@@ -83,7 +83,7 @@ build: build-libc-swig ## Build PySkycoin Python package
 
 test-ci: build-libc build-swig develop ## Run tests on (Travis) CI build
 	tox
-	# (cd $(PYTHON_CLIENT_DIR) && tox)
+	(cd $(PYTHON_CLIENT_DIR) && tox)
 
 test-skyapi: build-libc build-swig develop ## Run project test suite by skyapi
 	(cd $(PYTHON_CLIENT_DIR) && $(PYTHON_BIN) setup.py test)
